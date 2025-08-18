@@ -79,7 +79,19 @@ $('#exportEntries').onclick = () => {
   a.download = 'compass-house-journal.json';
   a.click();
   URL.revokeObjectURL(url);
-};
+};<!-- Journal Entry Form -->
+<h2>New Journal Entry</h2>
+<input id="journalTitle" type="text" placeholder="Title" />
+<br><br>
+<textarea id="journalBody" rows="6" cols="40" placeholder="Write your thoughts..."></textarea>
+<br><br>
+<button id="saveEntry">Save Entry</button>
+
+<hr>
+
+<h2>Saved Entries</h2>
+<pre id="entriesLog"></pre>
+
 
 // --- Settings (optional API) ---
 function saveSettings(){
