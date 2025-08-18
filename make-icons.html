@@ -1,0 +1,64 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Make Compass House Icons</title>
+<style>
+  body{font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+       max-width:720px;margin:40px auto;padding:0 16px}
+  canvas{border:1px solid #ddd;border-radius:8px;display:block;margin:12px 0}
+  button{padding:10px 14px;border:1px solid #111;background:#111;color:#fff;border-radius:10px;cursor:pointer;margin-right:8px}
+</style>
+<h1>Compass House Icon Maker</h1>
+<p>Click a button to draw and download the PNG. Then upload it back into your repo.</p>
+
+<canvas id="c" width="512" height="512"></canvas>
+<div>
+  <button onclick="save(180,'apple-touch-icon.png')">Download 180 (iOS)</button>
+  <button onclick="save(192,'icon-192.png')">Download 192 (PWA)</button>
+  <button onclick="save(512,'icon-512.png')">Download 512 (PWA)</button>
+</div>
+
+<script>
+function draw(ctx, size){
+  ctx.clearRect(0,0,size,size);
+  // background
+  ctx.fillStyle = '#FAFAFA';
+  ctx.fillRect(0,0,size,size);
+
+  // compass circle
+  const r = size*0.4, cx = size/2, cy = size/2;
+  ctx.lineWidth = Math.max(2, size/64);
+  ctx.strokeStyle = '#000';
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+
+  // needle
+  ctx.fillStyle = '#000';
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - r + 6);
+  ctx.lineTo(cx + 6, cy + 10);
+  ctx.lineTo(cx, cy + r - 6);
+  ctx.lineTo(cx - 6, cy + 10);
+  ctx.closePath(); ctx.fill();
+
+  // CH label
+  ctx.fillStyle = '#000';
+  ctx.font = `${Math.floor(size*0.18)}px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial`;
+  ctx.textBaseline = 'top';
+  const text = 'CH';
+  const tw = ctx.measureText(text).width;
+  ctx.fillText(text, (size - tw)/2, size - size*0.26);
+}
+
+function save(size, filename){
+  const c = document.getElementById('c');
+  c.width = c.height = size;
+  const ctx = c.getContext('2d');
+  draw(ctx, size);
+  const a = document.createElement('a');
+  a.href = c.toDataURL('image/png');
+  a.download = filename;
+  a.click();
+}
+
+// draw preview
+draw(document.getElementById('c').getContext('2d'), 512);
+</script>
