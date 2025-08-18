@@ -1,0 +1,9 @@
+{
+  "name": "Compass House",
+  "short_name": "Compass",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#ffffff",
+  "icons": []
+}
