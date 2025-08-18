@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compass House</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+  <header>
+    <h1>Compass House</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Today’s Rituals</h2>
+      <label><input type="checkbox" class="ritual" data-key="morning"> Morning check-in</label>
+      <label><input type="checkbox" class="ritual" data-key="midday"> Midday reset</label>
+      <label><input type="checkbox" class="ritual" data-key="evening"> Evening reflect</label>
+      <div class="row"><button id="resetRituals">Reset for today</button></div>
+    </section>
+
+    <section class="card">
+      <h2>Quick Journal</h2>
+      <input id="journalTitle" placeholder="Title">
+      <textarea id="journalBody" placeholder="What’s on your mind?"></textarea>
+      <div class="row">
+        <button id="saveEntry">Save Entry</button>
+        <button id="exportEntries">Export JSON</button>
+      </div>
+      <div id="entries"></div>
+    </section>
+
+    <section class="card">
+      <h2>Settings</h2>
+      <label>Optional API base URL:
+        <input id="apiBase" placeholder="https://your-worker.example/">
+      </label>
+      <div class="row">
+        <button id="saveSettings">Save Settings</button>
+        <button id="testHealth">Test /health</button>
+      </div>
+      <pre id="apiLog"></pre>
+      <p class="hint">Tip: Add this app to your Home Screen from Safari’s Share menu.</p>
+    </section>
+  </main>
+
+  <footer><small>Made with love by Heidi — The Compass House</small></footer>
+  <script src="app.js"></script>
+</body>
+</html>
