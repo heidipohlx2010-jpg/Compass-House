@@ -161,3 +161,63 @@ document.getElementById("clearAll").addEventListener("click", () => {
 
 // Reload list on startup
 document.addEventListener("DOMContentLoaded", loadEntries);
+// ===== Journal Save + List =====
+
+// Save one entry to localStorage
+function saveEntry() {
+  const titleEl = document.getElementById('journalTitle');
+  const bodyEl  = document.getElementById('journalBody');
+
+  const title = (titleEl?.value || '').trim();
+  const text  = (bodyEl?.value  || '').trim();
+
+  if (!title && !text) {
+    alert('Write something first 😀');
+    return;
+  }
+
+  const id = Date.now();
+  const entry = { id, title, text, ts: new Date().toISOString() };
+
+  localStorage.setItem(`entry:${id}`, JSON.stringify(entry));
+
+  // clear inputs
+  if (titleEl) titleEl.value = '';
+  if (bodyEl)  bodyEl.value  = '';
+
+  loadEntries(); // refresh the list
+}
+
+// Build the Saved Entries list
+function loadEntries() {
+  const list = document.getElementById('entriesList');
+  if (!list) return;
+
+  list.innerHTML = '';
+
+  const keys = Object.keys(localStorage)
+    .filter(k => k.startsWith('entry:'))
+    .sort()
+    .reverse(); // newest first
+
+  if (keys.length === 0) {
+    const li = document.createElement('li');
+    li.textContent = 'No entries yet.';
+    list.appendChild(li);
+    return;
+  }
+
+  keys.forEach(k => {
+    const e = JSON.parse(localStorage.getItem(k) || 'null');
+    if (!e) return;
+
+    const li = document.createElement('li');
+    const when = new Date(e.ts).toLocaleString();
+    li.textContent = `${when} — ${e.title || '(untitled)'} — ${e.text}`;
+    list.appendChild(li);
+  });
+}
+
+// Wire up button + load on start
+document.getElementById('saveEntry')?.addEventListener('click', saveEntry);
+window.addEventListener('load', loadEntries);
