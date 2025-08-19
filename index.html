@@ -31,13 +31,17 @@
 
   <script src="app.js"></script>
 </body>
-    <section class="card">
-      <h2>Today’s Rituals</h2>
-      <label><input type="checkbox" class="ritual" data-key="morning"> Morning check-in</label>
-      <label><input type="checkbox" class="ritual" data-key="midday"> Midday reset</label>
-      <label><input type="checkbox" class="ritual" data-key="evening"> Evening reflect</label>
-      <div class="row"><button id="resetRituals">Reset for today</button></div>
-    </section>
+ <section class="card">
+  <h2>Quick Journal</h2>
+  <input id="journalTitle" type="text" placeholder="Title">
+  <textarea id="journalBody" rows="6" cols="40" placeholder="What’s on your mind?"></textarea>
+  <div class="row">
+    <button onclick="saveEntry()">Save Entry</button>
+    <button id="exportEntries">Export JSON</button>
+  </div>
+</section>
+   
+    
 
    <section class="card">
   <h2>Quick Journal</h2>
