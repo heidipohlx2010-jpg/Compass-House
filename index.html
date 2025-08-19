@@ -39,16 +39,16 @@
       <div class="row"><button id="resetRituals">Reset for today</button></div>
     </section>
 
-    <section class="card">
-      <h2>Quick Journal</h2>
-      <input id="journalTitle" placeholder="Title">
-      <textarea id="journalBody" placeholder="What’s on your mind?"></textarea>
-      <div class="row">
-        <button id="saveEntry">Save Entry</button>
-        <button id="exportEntries">Export JSON</button>
-      </div>
-      <div id="entries"></div>
-    </section>
+   <section class="card">
+  <h2>Quick Journal</h2>
+  <input id="journalTitle" type="text" placeholder="Title">
+  <textarea id="journalBody" rows="6" cols="40" placeholder="What’s on your mind?"></textarea>
+  <div class="row">
+    <button onclick="saveEntry()">Save Entry</button>
+    <button id="exportEntries">Export JSON</button>
+  </div>
+</section>
+
 
     <section class="card">
       <h2>Settings</h2>
