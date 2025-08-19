@@ -41,3 +41,7 @@ function loadEntries(){
 
 document.getElementById('saveEntry')?.addEventListener('click', saveEntry);
 window.addEventListener('load', loadEntries);
+document.getElementById('clearAll')?.addEventListener('click', () => {
+  Object.keys(localStorage).forEach(k => { if (k.startsWith('entry:')) localStorage.removeItem(k); });
+  loadEntries();
+});
