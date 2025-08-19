@@ -135,3 +135,29 @@ $("#testHealth")?.onclick = testHealth;
 // Init: load entries + settings
 loadEntries();
 loadSettings();
+// --- Show saved entries in the list ---
+function loadEntries() {
+  const entriesList = document.getElementById("entriesList");
+  entriesList.innerHTML = "";
+
+  const keys = Object.keys(localStorage).filter(k => k.startsWith("entry:"));
+  keys.forEach(key => {
+    const entry = JSON.parse(localStorage.getItem(key));
+    if (entry) {
+      const li = document.createElement("li");
+      li.textContent = `${entry.title}: ${entry.body}`;
+      entriesList.appendChild(li);
+    }
+  });
+}
+
+// --- Clear all entries button ---
+document.getElementById("clearAll").addEventListener("click", () => {
+  Object.keys(localStorage).forEach(k => {
+    if (k.startsWith("entry:")) localStorage.removeItem(k);
+  });
+  loadEntries();
+});
+
+// Reload list on startup
+document.addEventListener("DOMContentLoaded", loadEntries);
