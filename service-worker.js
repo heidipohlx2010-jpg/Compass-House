@@ -24,3 +24,8 @@ self.addEventListener('fetch', e=>{
     caches.match(e.request).then(res=>res || fetch(e.request))
   );
 });
+
+document.getElementById('saveEntry')
+document.getElementById('journalTitle')
+document.getElementById('journalBody')
+document.getElementById('entriesList')
